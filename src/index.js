@@ -2,6 +2,7 @@ import express from 'express'
 import dotenv from 'dotenv'
 import sequelize from '../config/db.js'
 import bookRoutes from '../src/routes/bookRoutes.js'
+import userRoutes from "../src/routes/userRoutes.js"
 
 dotenv.config()
 
@@ -15,6 +16,7 @@ app.get('/',(req,res)=>{
 const PORT= process.env.PORT | 4000;
 
  app.use("/api/books",bookRoutes);
+ app.use("/api/users",userRoutes);
 
 (async () => {
     try {
