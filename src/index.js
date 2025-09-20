@@ -3,6 +3,7 @@ import dotenv from 'dotenv'
 import sequelize from '../config/db.js'
 import bookRoutes from '../src/routes/bookRoutes.js'
 import userRoutes from "../src/routes/userRoutes.js"
+import orderRoutes from "./routes/orderRoutes.js"
 
 dotenv.config()
 
@@ -17,6 +18,7 @@ const PORT= process.env.PORT | 4000;
 
  app.use("/api/books",bookRoutes);
  app.use("/api/users",userRoutes);
+ app.use("/api/orders",orderRoutes);
 
 (async () => {
     try {
