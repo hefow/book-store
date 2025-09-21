@@ -1,5 +1,6 @@
 import Book from "../model/book.js";
 import Order from "../model/order.js";
+import User from "../model/user.js";
 
 
 export const makeOrder = async (req,res) => {
@@ -36,10 +37,27 @@ export const makeOrder = async (req,res) => {
 
 export const getAllOrders = async(req,res) => {
     try {
-        if(req.user.role == "admin"){
-            const orders = await Order.findAll({include: ["User","Book"]});
-            res.status(200).json(orders);
+        const page = parseInt(req.query.page) || 1;
+        const limit = parseInt(req.query.limit) || 10;
+        const offset = (page - 1)* limit;
+
+        const {count , rows} = await Order.findAndCountAll({
+            limit,
+            offset,
+            include:[
+                {model: User, attributes:["id","username"]},
+                {model: Book, attributes:["id","author","price"]}
+            ],
+            order: [["createdAt", "DESC"]],
         }
+        );
+
+            res.json({
+            totalOrders: count,
+            totalPages: Math.ceil(count / limit),
+            currentPage: page,
+            orders: rows,
+            });
     } catch (error) {
         console.log(error);
         res.status(500).json({message: "Server error"});
