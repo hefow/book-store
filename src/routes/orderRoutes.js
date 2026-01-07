@@ -5,7 +5,7 @@ import { getAllOrders, getOrders, makeOrder } from "../controller/orderControlle
 const router = express.Router();
 
 router.post("/",protect,makeOrder);
-router.get("/all",protect,isAdmin,getAllOrders);
+router.get("/all",protect,getAllOrders);
 router.get("/:id",protect,getOrders);
 
 export default router;

@@ -14,6 +14,9 @@ const Book = sequelize.define("Book",{
     author:{
         type:DataTypes.STRING
     },
+    image:{
+        type: DataTypes.STRING
+    },
     price:{
         type: DataTypes.DECIMAL(10,2),
         defaultValue: 0.0
@@ -21,6 +24,10 @@ const Book = sequelize.define("Book",{
     stock:{
         type: DataTypes.INTEGER,
         defaultValue: 0
+    },
+    discount:{
+        type: DataTypes.DECIMAL(5,2),
+        defaultValue: 0.0
     }
 })
 

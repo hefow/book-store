@@ -52,12 +52,12 @@ export const getAllOrders = async(req,res) => {
         }
         );
 
-            res.json({
+        res.json({
             totalOrders: count,
             totalPages: Math.ceil(count / limit),
             currentPage: page,
             orders: rows,
-            });
+        });
     } catch (error) {
         console.log(error);
         res.status(500).json({message: "Server error"});

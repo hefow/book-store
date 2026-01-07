@@ -1,5 +1,6 @@
 import express from 'express'
 import dotenv from 'dotenv'
+import cors from 'cors'
 import sequelize from '../config/db.js'
 import bookRoutes from '../src/routes/bookRoutes.js'
 import userRoutes from "../src/routes/userRoutes.js"
@@ -9,6 +10,8 @@ dotenv.config()
 
 const app =express()
 app.use(express.json())
+app.use(express.urlencoded({extended:true}));
+app.use(cors())
 
 app.get('/',(req,res)=>{
     res.send("Bookstore Inventory API is running 🚀")
